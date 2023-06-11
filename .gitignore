@@ -1,5 +1,7 @@
-\ConsoleApp1\ConsoleApp1\bin\
+/ConsoleApp1/ConsoleApp1/bin/
 
-\ConsoleApp1\ConsoleApp1\obj\
+git rm --cached /ConsoleApp1/ConsoleApp1/bin/
+
+/ConsoleApp1/ConsoleApp1/obj/
 
 .vs

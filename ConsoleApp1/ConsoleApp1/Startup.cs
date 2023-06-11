@@ -23,7 +23,7 @@ namespace ConsoleApp1
                 });
             };
 
-            app.Use(name);
+            app.Use(name); 
 
             app.Use((HttpContext context, Func<Task> next) =>
             {
