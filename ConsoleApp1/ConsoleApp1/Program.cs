@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Formatters.Xml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,18 +15,24 @@ namespace ConsoleApp1
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+
                     webBuilder.UseStartup<Startup>();
                     webBuilder.UseUrls("http://localhost:8000");
                 }).Build().Run();
 
-            Sub x = (a, t) =>
-            {
-                return 0;
-            };
+            //var builder = WebApplication.CreateBuilder(args);
 
-            x(3,"sp[diobmvpsibk");
-            
-        
+            //builder.Services.AddControllers();  // добавляем поддержку контроллеров
+
+            //var app = builder.Build();
+
+            //// устанавливаем сопоставление маршрутов с контроллерами
+            //app.MapControllerRoute(
+            //    name: "default",
+            //    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            //app.Run();
+
         }
 
         //public static int someMethod(int a, string someText)
