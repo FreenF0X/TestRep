@@ -17,7 +17,7 @@ namespace ConsoleApp1
                 {
 
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://*:8000");
+                    webBuilder.UseUrls("http://localhost:8000");
                 }).Build().Run();
 
             //var builder = WebApplication.CreateBuilder(args);
