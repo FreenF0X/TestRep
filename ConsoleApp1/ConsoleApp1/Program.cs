@@ -15,30 +15,14 @@ namespace ConsoleApp1
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-
+                    
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://localhost:8000");
+                    webBuilder.UseUrls("http://*:8000");
+                    //webBuilder.UseUrls("http://localhost:8000");
+                    //http://192.168.1.123:8000
                 }).Build().Run();
 
-            //var builder = WebApplication.CreateBuilder(args);
-
-            //builder.Services.AddControllers();  // добавляем поддержку контроллеров
-
-            //var app = builder.Build();
-
-            //// устанавливаем сопоставление маршрутов с контроллерами
-            //app.MapControllerRoute(
-            //    name: "default",
-            //    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            //app.Run();
-
         }
-
-        //public static int someMethod(int a, string someText)
-        //{
-        //    return 0;
-        //}
 
         public delegate int Sub(int a, string someText);
     }

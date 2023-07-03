@@ -12,6 +12,7 @@ namespace ConsoleApp1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -23,31 +24,23 @@ namespace ConsoleApp1
             app.UseEndpoints(endpoints =>
             {
                 // обработка запроса - получаем констекст запроса в виде объекта context
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             //app.Use((HttpContext context, Func<Task> next) =>
             //{
-                
+
             //    Console.WriteLine(context.Request.Method);
             //    Console.WriteLine(context.Request.Path.ToString());
             //    next();
             //    return Task.Run(() => {
-                    
+
             //    });
             //});
 
-            //app.Use((HttpContext context, Func<Task> next) =>
-            //{
-            //    Console.WriteLine("SomeText");
-            //    next();
-            //    return Task.Run(() => {
-
-            //    });
-
-            //});
         }
     }
 }
