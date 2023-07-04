@@ -15,6 +15,11 @@ namespace ConsoleApp1.Controllers
     {
         Stack<string> stack = new Stack<string>();
 
+        public StackController(Class2 class2)
+        {
+
+        }
+        
         [HttpGet("Check")]
         public int Check()
         {
