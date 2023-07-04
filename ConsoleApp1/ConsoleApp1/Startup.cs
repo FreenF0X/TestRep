@@ -13,6 +13,10 @@ namespace ConsoleApp1
         {
             services.AddControllers();
             services.AddSwaggerGen();
+            services.AddSingleton((serviceProvider) =>
+            {
+                return new Class2(1);
+            });
         }
 
         public void Configure(IApplicationBuilder app)

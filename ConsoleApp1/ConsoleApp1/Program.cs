@@ -12,6 +12,36 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            var somex = new ServiceCollection();
+            somex.AddTransient<Class1>();
+            //somex.AddSingleton<int>();
+            int i = 0;
+            somex.AddSingleton((services) => {
+                i++;
+                return new Class2(i);
+            });
+
+
+            using (var serviceProvider = somex.BuildServiceProvider())
+            {
+                var shit1 = serviceProvider.GetRequiredService<Class1>();
+                shit1.Class2.Number = 5;
+                var shit2 = serviceProvider.GetRequiredService<Class1>();
+                var shit3 = serviceProvider.GetRequiredService<Class1>();
+            }
+                
+            
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
