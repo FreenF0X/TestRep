@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
@@ -15,7 +17,7 @@ namespace ConsoleApp1
             services.AddSwaggerGen();
             services.AddSingleton((serviceProvider) =>
             {
-                return new Class2(1);
+                return new List<Stack<String>>();
             });
         }
 

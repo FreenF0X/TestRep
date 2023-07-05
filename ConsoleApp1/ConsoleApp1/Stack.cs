@@ -48,6 +48,8 @@ namespace ConsoleApp1
         }
         public T Peek()
         {
+            if (IsEmpty)
+                throw new InvalidOperationException("Стек пуст");
             return items[count - 1];
         }
 

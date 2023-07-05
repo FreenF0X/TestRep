@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,37 +15,64 @@ namespace ConsoleApp1.Controllers
     [Route("Stack")]
     public class StackController : ControllerBase
     {
-        Stack<string> stack = new Stack<string>();
+        List<Stack<String>> tempStakList;
 
-        public StackController(Class2 class2)
+        public StackController(List<Stack<String>> StakList)
         {
-
+            tempStakList = StakList;
         }
-        
-        [HttpGet("Check")]
-        public int Check()
+
+        [HttpPost("Check")]
+        public int Check(RequestBody body)
         {
-            
-            return stack.Count;
+
+            return tempStakList[body.NumberOfStack].Count;
+        }
+
+        [HttpGet("CreateNewStack")]
+        public string CreateNewStack()
+        {
+            tempStakList.Add(new Stack<string>());
+            return "Новый стак создан.";
+        }
+
+        [HttpGet("CountOfStacks")]
+        public string CountOfStacks()
+        {
+            return "Количество стаков: " + tempStakList.Count;
         }
 
         [HttpPost("Push")]
         public string Push(RequestBody body)
         {
-            stack.Push(body.Element);
-            return "Добавлен элемент: "+ body.Element;
+            tempStakList[body.NumberOfStack].Push(body.Element);
+            return "Добавлен элемент: " + tempStakList[0].Peek();
         }
 
-        [HttpGet("Peek")]
-        public string Peek()
+        [HttpPost("Peek")]
+        public string Peek(RequestBody body)
         {
-            return stack.Peek().ToString();
+            try
+            {
+                return tempStakList[body.NumberOfStack].Peek().ToString();
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
         }
-        
-        [HttpGet("Pop")]
-        public string Pop()
+
+        [HttpPost("Pop")]
+        public string Pop(RequestBody body)
         {
-            return stack.Pop().ToString();
+            try
+            {
+                return tempStakList[body.NumberOfStack].Pop().ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
 
@@ -51,7 +80,8 @@ namespace ConsoleApp1.Controllers
     }
 
     public class RequestBody
-    {
+    {        
+        public int NumberOfStack { get; set; }
         public string Element { get; set; }
     }
 
