@@ -23,10 +23,17 @@ namespace ConsoleApp1.Controllers
         }
 
         [HttpPost("Check")]
-        public int Check(RequestBody body)
+        public string Check(RequestBody body)
         {
 
-            return tempStakList[body.NumberOfStack].Count;
+            return ("Количество элементов в стаке: " +tempStakList[body.NumberOfStack].Count);
+        }
+
+        [HttpPost("DeleteStack")]
+        public string DeleteStack(RequestBody body)
+        {
+            tempStakList.RemoveAt(body.NumberOfStack);
+            return ("Стак номер: " + body.NumberOfStack + " удален.");
         }
 
         [HttpGet("CreateNewStack")]
