@@ -19,33 +19,24 @@ namespace ConsoleApp1
             {
                 return new List<Stack<String>>();
             });
+            services.AddSingleton((serviceProvider) =>
+            {
+                return new List<Queue<String>>();
+            });
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            // добавляем возможности маршрутизации
+            
             app.UseRouting();
 
-            // устанавливаем адреса, которые будут обрабатываться
             app.UseEndpoints(endpoints =>
             {
-                // обработка запроса - получаем констекст запроса в виде объекта context
                 endpoints.MapControllers();
             });
 
             app.UseSwagger();
             app.UseSwaggerUI();
-
-            //app.Use((HttpContext context, Func<Task> next) =>
-            //{
-
-            //    Console.WriteLine(context.Request.Method);
-            //    Console.WriteLine(context.Request.Path.ToString());
-            //    next();
-            //    return Task.Run(() => {
-
-            //    });
-            //});
 
         }
     }

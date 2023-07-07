@@ -15,45 +15,45 @@ namespace ConsoleApp1.Controllers
     [Route("Stack")]
     public class StackController : ControllerBase
     {
-        List<Stack<String>> tempStakList;
+        List<Stack<String>> tempStackList;
 
         public StackController(List<Stack<String>> StakList)
         {
-            tempStakList = StakList;
+            tempStackList = StakList;
+        }
+
+        [HttpGet("CreateNewStack")]
+        public string CreateNewStack()
+        {
+            tempStackList.Add(new Stack<string>());
+            return "Новый стек создан.";
+        }
+
+        [HttpPost("DeleteStack")]
+        public string DeleteStack(RequestBody body)
+        {
+            tempStackList.RemoveAt(body.Number);
+            return ("Стек номер: " + body.Number + " удален.");
+        }
+
+        [HttpGet("CountOfStacks")]
+        public string CountOfStacks()
+        {
+            return "Количество стеков: " + tempStackList.Count;
         }
 
         [HttpPost("Check")]
         public string Check(RequestBody body)
         {
 
-            return ("Количество элементов в стаке: " +tempStakList[body.NumberOfStack].Count);
-        }
-
-        [HttpPost("DeleteStack")]
-        public string DeleteStack(RequestBody body)
-        {
-            tempStakList.RemoveAt(body.NumberOfStack);
-            return ("Стак номер: " + body.NumberOfStack + " удален.");
-        }
-
-        [HttpGet("CreateNewStack")]
-        public string CreateNewStack()
-        {
-            tempStakList.Add(new Stack<string>());
-            return "Новый стак создан.";
-        }
-
-        [HttpGet("CountOfStacks")]
-        public string CountOfStacks()
-        {
-            return "Количество стаков: " + tempStakList.Count;
+            return ("Количество элементов в стеке: " + tempStackList[body.Number].Count);
         }
 
         [HttpPost("Push")]
         public string Push(RequestBody body)
         {
-            tempStakList[body.NumberOfStack].Push(body.Element);
-            return "Добавлен элемент: " + tempStakList[0].Peek();
+            tempStackList[body.Number].Push(body.Element);
+            return "Добавлен элемент: " + body.Element;
         }
 
         [HttpPost("Peek")]
@@ -61,7 +61,7 @@ namespace ConsoleApp1.Controllers
         {
             try
             {
-                return tempStakList[body.NumberOfStack].Peek().ToString();
+                return tempStackList[body.Number].Peek().ToString();
             }
             catch(Exception ex)
             {
@@ -74,7 +74,7 @@ namespace ConsoleApp1.Controllers
         {
             try
             {
-                return tempStakList[body.NumberOfStack].Pop().ToString();
+                return tempStackList[body.Number].Pop().ToString();
             }
             catch (Exception ex)
             {
@@ -83,13 +83,6 @@ namespace ConsoleApp1.Controllers
         }
 
 
-
-    }
-
-    public class RequestBody
-    {        
-        public int NumberOfStack { get; set; }
-        public string Element { get; set; }
     }
 
 }
