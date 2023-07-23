@@ -17,9 +17,9 @@ namespace ConsoleApp1.Controllers
     {
         List<Stack<String>> tempStackList;
 
-        public StackController(List<Stack<String>> StakList)
+        public StackController(List<Stack<String>> StaсkList)
         {
-            tempStackList = StakList;
+            tempStackList = StaсkList;
         }
 
         [HttpGet("CreateNewStack")]

@@ -23,6 +23,10 @@ namespace ConsoleApp1
             {
                 return new List<Queue<String>>();
             });
+            services.AddSingleton((serviceProvider) =>
+            {
+                return new List<List<String>>();
+            });
         }
 
         public void Configure(IApplicationBuilder app)
