@@ -30,10 +30,11 @@ namespace ConsoleApp1.Controllers
         }
 
         [HttpDelete]
-        public string DeleteStack(int id)
+        public string DeleteStack(int? id)
         {
-            tempStackList.RemoveAt(body.Number);
-            return ("Стек номер: " + body.Number + " удален.");
+            
+            tempStackList.RemoveAt((int)id);
+            return ("Стек номер: " + id + " удален.");
         }
 
         [HttpGet("count")]
