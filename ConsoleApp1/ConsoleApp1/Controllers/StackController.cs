@@ -12,51 +12,51 @@ using System.Xml.Linq;
 namespace ConsoleApp1.Controllers
 {
     [ApiController]
-    [Route("Stack")]
+    [Route("stacks")]
     public class StackController : ControllerBase
     {
         List<Stack<String>> tempStackList;
 
-        public StackController(List<Stack<String>> StaсkList)
+        public StackController(List<Stack<String>> staсkList)
         {
-            tempStackList = StaсkList;
+            tempStackList = staсkList;
         }
 
-        [HttpGet("CreateNewStack")]
+        [HttpPost]
         public string CreateNewStack()
         {
             tempStackList.Add(new Stack<string>());
             return "Новый стек создан.";
         }
 
-        [HttpPost("DeleteStack")]
-        public string DeleteStack(RequestBody body)
+        [HttpDelete]
+        public string DeleteStack(int id)
         {
             tempStackList.RemoveAt(body.Number);
             return ("Стек номер: " + body.Number + " удален.");
         }
 
-        [HttpGet("CountOfStacks")]
+        [HttpGet("count")]
         public string CountOfStacks()
         {
             return "Количество стеков: " + tempStackList.Count;
         }
 
-        [HttpPost("Check")]
-        public string Check(RequestBody body)
-        {
+        //[HttpPost("check")]
+        //public string Check(RequestBody body)
+        //{
 
-            return ("Количество элементов в стеке: " + tempStackList[body.Number].Count);
-        }
+        //    return ("Количество элементов в стеке: " + tempStackList[body.Number].Count);
+        //}
 
-        [HttpPost("Push")]
+        [HttpPost("push")]
         public string Push(RequestBody body)
         {
             tempStackList[body.Number].Push(body.Element);
             return "Добавлен элемент: " + body.Element;
         }
 
-        [HttpPost("Peek")]
+        [HttpGet("peek")]
         public string Peek(RequestBody body)
         {
             try
@@ -69,7 +69,7 @@ namespace ConsoleApp1.Controllers
             }
         }
 
-        [HttpPost("Pop")]
+        [HttpPost("pop")]
         public string Pop(RequestBody body)
         {
             try
