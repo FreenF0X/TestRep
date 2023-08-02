@@ -51,18 +51,18 @@ namespace ConsoleApp1.Controllers
         //}
 
         [HttpPost("push")]
-        public string Push(RequestBody body)
+        public string Push(int? id, RequestBody body)
         {
-            tempStackList[body.Number].Push(body.Element);
+            tempStackList[(int)id].Push(body.Element);
             return "Добавлен элемент: " + body.Element;
         }
 
         [HttpGet("peek")]
-        public string Peek(RequestBody body)
+        public string Peek(int? id, RequestBody body)
         {
             try
             {
-                return tempStackList[body.Number].Peek().ToString();
+                return tempStackList[(int)id].Peek().ToString();
             }
             catch(Exception ex)
             {
@@ -70,12 +70,12 @@ namespace ConsoleApp1.Controllers
             }
         }
 
-        [HttpPost("pop")]
-        public string Pop(RequestBody body)
+        [HttpGet("pop")]
+        public string Pop(int? id, RequestBody body)
         {
             try
             {
-                return tempStackList[body.Number].Pop().ToString();
+                return tempStackList[(int)id].Pop().ToString();
             }
             catch (Exception ex)
             {
