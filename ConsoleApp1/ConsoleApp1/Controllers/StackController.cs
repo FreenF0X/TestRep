@@ -23,10 +23,10 @@ namespace ConsoleApp1.Controllers
         }
 
         [HttpPost]
-        public string CreateNewStack()
+        public ResponseBody CreateNewStack()
         {
             tempStackList.Add(new Stack<string>());
-            return "Новый стек создан.";
+            return new ResponseBody { Response = "Новый стек создан." };
         }
 
         [HttpDelete]
@@ -58,7 +58,7 @@ namespace ConsoleApp1.Controllers
         }
 
         [HttpGet("peek")]
-        public string Peek(int? id, RequestBody body)
+        public string Peek(int? id)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace ConsoleApp1.Controllers
         }
 
         [HttpGet("pop")]
-        public string Pop(int? id, RequestBody body)
+        public string Pop(int? id)
         {
             try
             {
