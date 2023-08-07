@@ -30,43 +30,43 @@ namespace ConsoleApp1.Controllers
         }
 
         [HttpDelete]
-        public string DeleteStack(int? id)
+        public ResponseBody DeleteStack(int? id)
         {
             
             tempStackList.RemoveAt((int)id);
-            return ("Стек номер: " + id + " удален.");
+            return new ResponseBody { Response = "Стек номер: " + id + " удален." };
         }
 
         [HttpGet("count")]
-        public string CountOfStacks()
+        public ResponseBody CountOfStacks()
         {
-            return "Количество стеков: " + tempStackList.Count;
+            return  new ResponseBody { Response = "Количество стеков: " + tempStackList.Count };
         }
 
-        //[HttpPost("check")]
-        //public string Check(RequestBody body)
-        //{
+        [HttpGet("check")]
+        public ResponseBody Check(int? id)
+        {
 
-        //    return ("Количество элементов в стеке: " + tempStackList[body.Number].Count);
-        //}
+            return new ResponseBody { Response = ("Количество элементов в стеке: " + tempStackList[(int)id].Count) };
+        }
 
         [HttpPost("push")]
-        public string Push(int? id, RequestBody body)
+        public ResponseBody Push(int? id, RequestBody body)
         {
             tempStackList[(int)id].Push(body.Element);
-            return "Добавлен элемент: " + body.Element;
+            return new ResponseBody { Response = "Добавлен элемент: " + body.Element };
         }
 
         [HttpGet("peek")]
-        public string Peek(int? id)
+        public ResponseBody Peek(int? id)
         {
             try
             {
-                return tempStackList[(int)id].Peek().ToString();
+                return new ResponseBody {Response = tempStackList[(int)id].Peek().ToString() };
             }
             catch(Exception ex)
             {
-                return ex.Message;
+                return new ResponseBody { Response = ex.Message };
             }
         }
 
