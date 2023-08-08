@@ -71,15 +71,15 @@ namespace ConsoleApp1.Controllers
         }
 
         [HttpGet("pop")]
-        public string Pop(int? id)
+        public ResponseBody Pop(int? id)
         {
             try
             {
-                return tempStackList[(int)id].Pop().ToString();
+                return new ResponseBody { Response = tempStackList[(int)id].Pop().ToString() };
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return new ResponseBody { Response = ex.Message };
             }
         }
 
