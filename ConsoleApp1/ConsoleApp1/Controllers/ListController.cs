@@ -1,66 +1,66 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using System.Collections.Generic;
-//using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System;
 
-//namespace ConsoleApp1.Controllers
-//{
-//    [ApiController]
-//    [Route("List")]
-//    public class ListController : Controller
-//    {
-//        List<List<String>> tempListList;
+namespace ConsoleApp1.Controllers
+{
+    [ApiController]
+    [Route("lists")]
+    public class ListController : Controller
+    {
+        List<List<String>> tempListList;
 
-//        public ListController(List<List<String>> StaсkList)
-//        {
-//            tempListList = StaсkList;
-//        }
+        public ListController(List<List<String>> StaсkList)
+        {
+            tempListList = StaсkList;
+        }
 
-//        [HttpGet("CreateNewList")]
-//        public string CreateNewList()
-//        {
-//            tempListList.Add(new List<string>());
-//            return "Новый лист создан.";
-//        }
+        [HttpPost]
+        public ResponseBody CreateNewList()
+        {
+            tempListList.Add(new List<string>());
+            return new ResponseBody { Response = "Новый лист создан." };
+        }
 
-//        [HttpPost("DeleteList")]
-//        public string DeleteList(RequestBody body)
-//        {
-//            tempListList.RemoveAt(body.Number);
-//            return ("Лист номер: " + body.Number + " удален.");
-//        }
+        [HttpDelete("{id}")]
+        public ResponseBody DeleteList(int id)
+        {
+            tempListList.RemoveAt(id);
+            return new ResponseBody { Response = ("Лист номер: " + id + " удален.") };
+        }
 
-//        [HttpGet("CountOfLists")]
-//        public string CountOfLists()
-//        {
-//            return "Количество листов: " + tempListList.Count;
-//        }
+        [HttpGet("count")]
+        public ResponseBody CountOfLists()
+        {
+            return new ResponseBody { Response = "Количество листов: " + tempListList.Count };
+        }
 
-//        [HttpPost("Check")]
-//        public string Check(RequestBody body)
-//        {
-//            return ("Количество элементов с листе: " + tempListList[body.Number].Count);
-//        }
+        [HttpGet("check/{id}")]
+        public ResponseBody Check(int id)
+        {
+            return new ResponseBody { Response = ("Количество элементов с листе: " + tempListList[id].Count) };
+        }
 
-//        [HttpPost("Add")]
-//        public string Add(RequestBody body)
-//        {
-//            tempListList[body.Number].Add(body.Element);
-//            return "Добавлен элемент: " + body.Element;
-//        }
+        [HttpPost("add/{id}")]
+        public ResponseBody Add(int id, RequestBody body)
+        {
+            tempListList[id].Add(body.Element);
+            return new ResponseBody { Response = "Добавлен элемент: " + body.Element };
+        }
 
-//        [HttpPost("Read")]
-//        public string Read(RequestBody body)
-//        {
-//            return ("Элемент: " + tempListList[body.Number][body.I]);
-//        }
+        [HttpGet("read/{idStruct}/{idElement}")]
+        public ResponseBody Read(int idStruct, int idElement)
+        {
+            return new ResponseBody { Response = ("Элемент: " + tempListList[idStruct][idElement]) };
+        }
 
-//        [HttpPost("Remove")]
-//        public string Remove(RequestBody body)
-//        {
-//            tempListList[body.Number].RemoveAt(body.I);
-//            return "Элемент удален";
-//        }
+        [HttpPost("remove/{idStruct}/{idElement}")]
+        public ResponseBody Remove(int idStruct, int idElement)
+        {
+            tempListList[idStruct].RemoveAt(idElement);
+            return new ResponseBody { Response = "Элемент удален" };
+        }
 
 
-//    }
-//}
+    }
+}

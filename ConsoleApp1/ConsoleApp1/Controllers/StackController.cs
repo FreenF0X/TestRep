@@ -29,53 +29,53 @@ namespace ConsoleApp1.Controllers
             return new ResponseBody { Response = "Новый стек создан." };
         }
 
-        [HttpDelete]
-        public ResponseBody DeleteStack(int? id)
+        [HttpDelete("{id}")]
+        public ResponseBody DeleteStack(int id)
         {
-            
-            tempStackList.RemoveAt((int)id);
+
+            tempStackList.RemoveAt(id);
             return new ResponseBody { Response = "Стек номер: " + id + " удален." };
         }
 
         [HttpGet("count")]
         public ResponseBody CountOfStacks()
         {
-            return  new ResponseBody { Response = "Количество стеков: " + tempStackList.Count };
+            return new ResponseBody { Response = "Количество стеков: " + tempStackList.Count };
         }
 
-        [HttpGet("check")]
-        public ResponseBody Check(int? id)
+        [HttpGet("check/{id}")]
+        public ResponseBody Check(int id)
         {
 
-            return new ResponseBody { Response = ("Количество элементов в стеке: " + tempStackList[(int)id].Count) };
+            return new ResponseBody { Response = ("Количество элементов в стеке: " + tempStackList[id].Count) };
         }
 
-        [HttpPost("push")]
-        public ResponseBody Push(int? id, RequestBody body)
+        [HttpPost("push/{id}")]
+        public ResponseBody Push(int id, RequestBody body)
         {
-            tempStackList[(int)id].Push(body.Element);
+            tempStackList[id].Push(body.Element);
             return new ResponseBody { Response = "Добавлен элемент: " + body.Element };
         }
 
-        [HttpGet("peek")]
-        public ResponseBody Peek(int? id)
+        [HttpGet("peek/{id}")]
+        public ResponseBody Peek(int id)
         {
             try
             {
-                return new ResponseBody {Response = tempStackList[(int)id].Peek().ToString() };
+                return new ResponseBody { Response = tempStackList[id].Peek().ToString() };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new ResponseBody { Response = ex.Message };
             }
         }
 
-        [HttpGet("pop")]
-        public ResponseBody Pop(int? id)
+        [HttpGet("pop/{id}")]
+        public ResponseBody Pop(int id)
         {
             try
             {
-                return new ResponseBody { Response = tempStackList[(int)id].Pop().ToString() };
+                return new ResponseBody { Response = tempStackList[id].Pop().ToString() };
             }
             catch (Exception ex)
             {
