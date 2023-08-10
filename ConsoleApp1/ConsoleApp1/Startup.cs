@@ -27,6 +27,10 @@ namespace ConsoleApp1
             {
                 return new List<List<String>>();
             });
+            services.AddSingleton((serviceProvider) =>
+            {
+                return new List<Dictionary<int,String>>();
+            });
         }
 
         public void Configure(IApplicationBuilder app)
