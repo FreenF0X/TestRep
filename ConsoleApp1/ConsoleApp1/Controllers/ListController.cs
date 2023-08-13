@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 namespace ConsoleApp1.Controllers
 {
@@ -51,14 +52,28 @@ namespace ConsoleApp1.Controllers
         [HttpGet("read/{idStruct}/{idElement}")]
         public ResponseBody Read(int idStruct, int idElement)
         {
-            return new ResponseBody { Response = ("Элемент: " + tempListList[idStruct][idElement]) };
+            try
+            {
+                return new ResponseBody { Response = ("Элемент: " + tempListList[idStruct][idElement]) };
+            }
+            catch (Exception e)
+            {
+                return new ResponseBody { Response = e.Message };
+            }
         }
 
         [HttpPost("remove/{idStruct}/{idElement}")]
         public ResponseBody Remove(int idStruct, int idElement)
         {
-            tempListList[idStruct].RemoveAt(idElement);
-            return new ResponseBody { Response = "Элемент удален" };
+            try
+            {
+                tempListList[idStruct].RemoveAt(idElement);
+                return new ResponseBody { Response = "Элемент удален" };
+            }
+            catch (Exception e)
+            {
+                return new ResponseBody { Response = e.Message };
+            }
         }
 
 
